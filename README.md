@@ -1,6 +1,6 @@
 # ofxPostGlitch
-This addon applies glitch effects to FBO with openframeworks.
-we recommend to use openFrameworks after v0073.
+This add-on applies a glitch effect to the FBO using openFrameworks.  
+We recommend using openFrameworks v0073 or later.
 
 ## Usage :
 You need at least two classes 'ofFbo' and 'ofxPostGlitch' to use it.
@@ -8,16 +8,16 @@ You need at least two classes 'ofFbo' and 'ofxPostGlitch' to use it.
 	ofFbo myFbo;
 	ofxPostGlitch myGlitch;
 
-In Setup(), you should give FBO's pointer to ofxPostGlitch instance.  
-Then the FBO must be allocated.
+In the Setup(), you should give FBO's pointer to ofxPostGlitch instance.
+Then allocate the FBO.
 
     void testApp::setup(){
     	myFbo.allocate(640,480);
     	myGlitch.setup(&myFbo);
     }
 
-Decide to apply effect or not with setFX function.  
-After that, call generateFX function and apply all enabled effects.
+Choose wether to apply effect or not with the setFX function.
+After that use generateFX function and apply all enabled effects.
 
 	void testApp::update(){
 		myGlitch.setFx(OFXPOSTGLITCH_CONVERGENCE,true);
@@ -28,7 +28,7 @@ After that, call generateFX function and apply all enabled effects.
 		myFbo.draw(0,0);
 	}
 
-You can check more detail in example project.
+More details can be found in the example project file.
 
 ## Glitch FXs	
 - Convergence
