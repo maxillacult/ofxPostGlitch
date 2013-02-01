@@ -17,7 +17,6 @@ void testApp::setup(){
 //--------------------------------------------------------------
 void testApp::update(){
 	myFbo.begin();
-
 	ofClear(0, 0, 0,255);
 	if (!bDrawLenna){
 		camera.begin();
@@ -28,6 +27,7 @@ void testApp::update(){
 			else				ofSetColor(255, 255, 255);
 
 			ofPushMatrix();
+			ofRotate(ofGetFrameNum(), 1.0, 1.0, 1.0);
 			ofTranslate((ofNoise(i/2.4)-0.5)*1000,
 						(ofNoise(i/5.6)-0.5)*1000,
 						(ofNoise(i/8.2)-0.5)*1000);
@@ -41,6 +41,7 @@ void testApp::update(){
 		lenna.draw(0, 0);
 	}
 	myFbo.end();
+
 }
 
 //--------------------------------------------------------------
