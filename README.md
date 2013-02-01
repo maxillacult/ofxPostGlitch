@@ -1,23 +1,22 @@
 # ofxPostGlitch
-このアドオンは、openFrameworks上でグリッチエフェクトを適用するためのアドオンです。
+This addon applies glitch effects to FBO with openframeworks.
 
 ## Usage :
-このアドオンを実現させるためには、最低2つのクラスを必要とします。
-ofFboと、ofxPostGlitchです。
+You need at least two classes 'ofFbo' and 'ofxPostGlitch' to use it.
 
-    ofFbo myFbo;
-    ofxPostGlitch myGlitch;
+	ofFbo myFbo;
+	ofxPostGlitch myGlitch;
 
-Setup関数内で、FboのポインタをofxPostGlitchクラスに渡します。
-この時、Fboはallocateでサイズが決まっている必要があります。
+In Setup(), you should give FBO's pointer to ofxPostGlitch instance.
+Then the FBO must be allocated.
 
     void testApp::setup(){
     	myFbo.allocate(640,480);
     	myGlitch.setup(&myFbo);
     }
 
-setFx関数でエフェクトの種類とON/OFFを指定します。
-その後generateFx関数を呼び出して、Fboにエフェクトを適用させてください。
+Decide to apply effect or not with setFX function.
+After that, call generateFX function and apply all enabled effects.
 
 	void testApp::update(){
 		myGlitch.setFx(OFXPOSTGLITCH_CONVERGENCE,true);
@@ -28,7 +27,7 @@ setFx関数でエフェクトの種類とON/OFFを指定します。
 		myFbo.draw(0,0);
 	}
 
-更に細かな情報に関しては、サンプルを参照してください。
+You can check more detail with example project.
 
 ## Glitch FXs	
 - Convergence
@@ -52,6 +51,8 @@ setFx関数でエフェクトの種類とON/OFFを指定します。
 - Greeninvert
 
 ## Developer info
-[maxilla inc.](http://maxilla.jp)
+maxilla inc.
+[http://maxilla.jp](http://maxilla.jp)
 
-[maxilla cult](http://cult.maxilla.jp)
+maxilla cult
+[http://cult.maxilla.jp](http://cult.maxilla.jp)

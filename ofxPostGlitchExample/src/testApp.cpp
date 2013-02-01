@@ -45,7 +45,7 @@ void testApp::update(){
 
 //--------------------------------------------------------------
 void testApp::draw(){
-
+	
 	/* draw normal view */
 	ofSetColor(255);
 	myFbo.draw(0, 0);
