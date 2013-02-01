@@ -1,5 +1,6 @@
 # ofxPostGlitch
 This addon applies glitch effects to FBO with openframeworks.
+we recommend to use openFrameworks after v0073.
 
 ## Usage :
 You need at least two classes 'ofFbo' and 'ofxPostGlitch' to use it.
