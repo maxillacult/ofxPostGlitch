@@ -7,7 +7,7 @@ You need at least two classes 'ofFbo' and 'ofxPostGlitch' to use it.
 	ofFbo myFbo;
 	ofxPostGlitch myGlitch;
 
-In Setup(), you should give FBO's pointer to ofxPostGlitch instance.
+In Setup(), you should give FBO's pointer to ofxPostGlitch instance.  
 Then the FBO must be allocated.
 
     void testApp::setup(){
@@ -15,7 +15,7 @@ Then the FBO must be allocated.
     	myGlitch.setup(&myFbo);
     }
 
-Decide to apply effect or not with setFX function.
+Decide to apply effect or not with setFX function.  
 After that, call generateFX function and apply all enabled effects.
 
 	void testApp::update(){
@@ -27,7 +27,7 @@ After that, call generateFX function and apply all enabled effects.
 		myFbo.draw(0,0);
 	}
 
-You can check more detail with example project.
+You can check more detail in example project.
 
 ## Glitch FXs	
 - Convergence
