@@ -1,5 +1,4 @@
 # ofxPostGlitch
-
 This add-on applies a glitch effect to the FBO using openFrameworks.  
 We recommend using openFrameworks v0073 or later.
 
