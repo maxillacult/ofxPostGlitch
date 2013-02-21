@@ -67,7 +67,6 @@ void ofxPostGlitch::generateFx(){
 			shader[i].setUniform1f		("timer"		,ofGetElapsedTimef());
 			shader[i].setUniform2fv		("blur_vec"		,v);
 
-
 			ShadingBuffer.begin();
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 			ofRect(0, 0, buffer_size.x, buffer_size.y);

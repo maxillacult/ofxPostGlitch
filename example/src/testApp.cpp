@@ -11,7 +11,9 @@ void testApp::setup(){
 	bDrawLenna = false;
 	bShowHelp  = true;
 	myFbo.allocate(512, 512);
+
 	myGlitch.setup(&myFbo);
+
 }
 
 //--------------------------------------------------------------

@@ -27,6 +27,8 @@ public:
 	ofFbo			myFbo;
 	ofEasyCam		camera;
 
+	ofTexture		texture;
+
 	/*Addon instance*/
 	ofxPostGlitch	myGlitch;
 };
