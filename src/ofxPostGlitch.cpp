@@ -3,7 +3,6 @@
 //
 //  Created by maxilla inc. on 2013/02/01.
 //
-//
 
 #include "ofxPostGlitch.h"
 
