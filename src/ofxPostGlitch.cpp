@@ -52,6 +52,7 @@ void ofxPostGlitch::generateFx(){
 		ShadeVal[3] = ofRandom(100);
 	}
 
+    ofPushStyle();
 	ofEnableBlendMode(OF_BLENDMODE_ALPHA);
 	ofSetColor(255);
 	glClearColor(0, 0, 0, 0.0);
@@ -93,6 +94,7 @@ void ofxPostGlitch::generateFx(){
 			targetBuffer->end();
 		}
 	}
+    ofPopStyle();
 }
 
 void ofxPostGlitch::onUpdate(ofEventArgs &data){
