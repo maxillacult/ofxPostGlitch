@@ -2,7 +2,7 @@
 //  ofxPostGlitch.h
 //
 //  Created by maxilla inc. on 2013/02/01.
-//
+//  Updated by TatsuyaOGth. on 2014/10~
 //
 
 #ifndef __ofxPostGlitchExample__ofxPostGlitch__

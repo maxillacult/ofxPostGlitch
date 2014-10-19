@@ -1,4 +1,4 @@
-#include "testApp.h"
+#include "ofApp.h"
 
 //--------------------------------------------------------------
 void testApp::setup(){
