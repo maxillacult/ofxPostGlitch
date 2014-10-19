@@ -27,6 +27,11 @@ void ofxPostGlitch::toggleFx(ofxPostGlitchType type_){
 	bShading[type_] ^= true;
 }
 
+void ofxPostGlitch::setFxTo(ofxPostGlitchType type_, float t){
+    this->setFx(type_, true);
+    timers.insert(make_pair(type_, t));
+}
+
 bool ofxPostGlitch::getFx(ofxPostGlitchType type_){
 	return bShading[type_];
 }
@@ -88,4 +93,18 @@ void ofxPostGlitch::generateFx(){
 			targetBuffer->end();
 		}
 	}
+}
+
+void ofxPostGlitch::onUpdate(ofEventArgs &data){
+    if (!timers.empty()){
+        float lastFrameTime = ofGetLastFrameTime();
+        map<ofxPostGlitchType, float>::iterator it = timers.begin();
+        while (it != timers.end()){
+            it->second -= lastFrameTime;
+            if (it->second < 0){
+                this->setFx(it->first, false);
+                timers.erase(it++);
+            } else ++it;
+        }
+    }
 }

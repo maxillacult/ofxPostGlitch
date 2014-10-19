@@ -54,7 +54,10 @@ public:
 		shader[14].load("Shaders/crRedinvert");
 		shader[15].load("Shaders/crBlueinvert");
 		shader[16].load("Shaders/crGreeninvert");
+        
         for (int i = 0; i < GLITCH_NUM; i++) bShading[i] = false;
+        
+        ofAddListener(ofEvents().update, this, &ofxPostGlitch::onUpdate);
 	}
 
 	/* Initialize & set target Fbo */
@@ -68,6 +71,9 @@ public:
 
 	/* Toggle each effects on/off */
 	void toggleFx(ofxPostGlitchType type_);
+    
+    /* Enable each effects for <t>sec. */
+    void setFxTo(ofxPostGlitchType type_, float t);
 
 	/* Return current effect's enabled info*/
 	bool getFx(ofxPostGlitchType type_);
@@ -82,6 +88,9 @@ protected:
 	ofFbo		ShadingBuffer;
 	ofPoint		buffer_size;
 	float ShadeVal[4];
+    map<ofxPostGlitchType, float> timers;
+    
+    void onUpdate(ofEventArgs &data);
 };
 
 #endif /* defined(__ofxPostGlitchExample__ofxPostGlitch__) */

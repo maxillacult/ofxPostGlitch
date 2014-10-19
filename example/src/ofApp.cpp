@@ -43,7 +43,6 @@ void testApp::update(){
 		lenna.draw(0, 0);
 	}
 	myFbo.end();
-
 }
 
 //--------------------------------------------------------------
@@ -96,6 +95,8 @@ void testApp::keyPressed(int key){
 	if (key == 't') myGlitch.setFx(OFXPOSTGLITCH_CR_BLUEINVERT	, true);
 	if (key == 'y') myGlitch.setFx(OFXPOSTGLITCH_CR_REDINVERT	, true);
 	if (key == 'u') myGlitch.setFx(OFXPOSTGLITCH_CR_GREENINVERT	, true);
+    
+    if (key == 'a') myGlitch.setFxTo(OFXPOSTGLITCH_CONVERGENCE  , 1);
 
 	if (key == 'l') bDrawLenna ^= true;
 	if (key == 'h') bShowHelp ^= true;
