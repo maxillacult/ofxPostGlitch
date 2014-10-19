@@ -69,7 +69,16 @@ void ofxPostGlitch::generateFx(){
 
 			ShadingBuffer.begin();
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-			ofRect(0, 0, buffer_size.x, buffer_size.y);
+
+            ofVec3f rectPoints[4];
+            rectPoints[0].set(0, 0, 0);
+            rectPoints[1].set(buffer_size.x, 0, 0);
+            rectPoints[2].set(buffer_size.x, buffer_size.y, 0);
+            rectPoints[3].set(0, buffer_size.y, 0);
+            glEnableClientState(GL_VERTEX_ARRAY);
+            glVertexPointer(3, GL_FLOAT, sizeof(ofVec3f), &rectPoints[0].x);
+            glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
+            
 			ShadingBuffer.end();
 			shader[i].end();
 

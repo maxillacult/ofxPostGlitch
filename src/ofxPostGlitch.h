@@ -54,6 +54,7 @@ public:
 		shader[14].load("Shaders/crRedinvert");
 		shader[15].load("Shaders/crBlueinvert");
 		shader[16].load("Shaders/crGreeninvert");
+        for (int i = 0; i < GLITCH_NUM; i++) bShading[i] = false;
 	}
 
 	/* Initialize & set target Fbo */
