@@ -10,87 +10,84 @@
 
 #include "ofMain.h"
 
-#define GLITCH_NUM 17
+static const string OFXPOSTGLITCH_DEFAULT_SHADER_DIR    = "Shaders";
+static const string OFXPOSTGLITCH_CONVERGENCE           = "convergence";
+static const string OFXPOSTGLITCH_GLOW                  = "glow";
+static const string OFXPOSTGLITCH_SHAKER                = "shaker";
+static const string OFXPOSTGLITCH_CUTSLIDER             = "cut_slider";
+static const string OFXPOSTGLITCH_TWIST                 = "twist";
+static const string OFXPOSTGLITCH_OUTLINE               = "outline";
+static const string OFXPOSTGLITCH_NOISE                 = "noise";
+static const string OFXPOSTGLITCH_SLITSCAN              = "slitscan";
+static const string OFXPOSTGLITCH_SWELL                 = "swell";
+static const string OFXPOSTGLITCH_INVERT                = "invert";
+static const string OFXPOSTGLITCH_CR_HIGHCONTRAST       = "crHighContrast";
+static const string OFXPOSTGLITCH_CR_BLUERAISE          = "crBlueraise";
+static const string OFXPOSTGLITCH_CR_REDRAISE           = "crRedraise";
+static const string OFXPOSTGLITCH_CR_GREENRAISE         = "crGreenraise";
+static const string OFXPOSTGLITCH_CR_REDINVERT          = "crRedinvert";
+static const string OFXPOSTGLITCH_CR_BLUEINVERT         = "crBlueinvert";
+static const string OFXPOSTGLITCH_CR_GREENINVERT        = "crGreeninvert";
 
-enum ofxPostGlitchType{
-	OFXPOSTGLITCH_CONVERGENCE,
-	OFXPOSTGLITCH_GLOW,
-	OFXPOSTGLITCH_SHAKER,
-	OFXPOSTGLITCH_CUTSLIDER,
-	OFXPOSTGLITCH_TWIST,
-	OFXPOSTGLITCH_OUTLINE,
-	OFXPOSTGLITCH_NOISE,
-	OFXPOSTGLITCH_SLITSCAN,
-	OFXPOSTGLITCH_SWELL,
-	OFXPOSTGLITCH_INVERT,
-	OFXPOSTGLITCH_CR_HIGHCONTRAST,
-	OFXPOSTGLITCH_CR_BLUERAISE,
-	OFXPOSTGLITCH_CR_REDRAISE,
-	OFXPOSTGLITCH_CR_GREENRAISE,
-	OFXPOSTGLITCH_CR_REDINVERT,
-	OFXPOSTGLITCH_CR_BLUEINVERT,
-	OFXPOSTGLITCH_CR_GREENINVERT
-};
-
-class ofxPostGlitch{
+class ofxPostGlitch
+{
+protected:
+    typedef struct _SHADER
+    {
+        bool        flug;
+        string      shaderName;
+        ofShader    shader;
+    } SHADER;
+    
+    vector<SHADER>      shaders;
+    map<string, float>  timers;
+    ofDirectory dir;
+    ofFbo*      targetBuffer;
+    ofFbo		ShadingBuffer;
+    ofPoint		buffer_size;
+    float ShadeVal[4];
+    
+    SHADER * getShaderFromName(const string & name);
+    void reset();
+    void onUpdate(ofEventArgs &data);
+    
 public:
 
-	ofxPostGlitch(){
+	ofxPostGlitch()
+    {
 		targetBuffer = NULL;
-		shader[0].load("Shaders/convergence");
-		shader[1].load("Shaders/glow");
-		shader[2].load("Shaders/shaker");
-		shader[3].load("Shaders/cut_slider");
-		shader[4].load("Shaders/twist");
-		shader[5].load("Shaders/outline");
-		shader[6].load("Shaders/noise");
-		shader[7].load("Shaders/slitscan");
-		shader[8].load("Shaders/swell");
-		shader[9].load("Shaders/invert");
-		shader[10].load("Shaders/crHighContrast");
-		shader[11].load("Shaders/crBlueraise");
-		shader[12].load("Shaders/crRedraise");
-		shader[13].load("Shaders/crGreenraise");
-		shader[14].load("Shaders/crRedinvert");
-		shader[15].load("Shaders/crBlueinvert");
-		shader[16].load("Shaders/crGreeninvert");
-        
-        for (int i = 0; i < GLITCH_NUM; i++) bShading[i] = false;
-        
         ofAddListener(ofEvents().update, this, &ofxPostGlitch::onUpdate);
 	}
 
-	/* Initialize & set target Fbo */
-	void setup(ofFbo* buffer_);
+	/* Initialize, set target Fbo and set shaders from directory */
+	bool setup(ofFbo* buffer_, const string & shaderDirectory);
+    bool setup(ofFbo* buffer_);
 
 	/* Set target Fbo */
 	void setFbo(ofFbo* buffer_);
+    
+    /* Set shaders from directory */
+    bool setShaders(const string & shaderDirectory);
+    
+    /* Set a shader */
+    bool setShader(const string & shaderPath);
 
 	/* Switch each effects on/off */
-	void setFx(ofxPostGlitchType type_,bool enabled);
+	void setFx(const string & shaderName,bool enabled);
 
 	/* Toggle each effects on/off */
-	void toggleFx(ofxPostGlitchType type_);
+	void toggleFx(const string & shaderName);
     
     /* Enable each effects for <t>sec. */
-    void setFxTo(ofxPostGlitchType type_, float t);
+    void setFxTo(const string & shaderName, float second);
 
 	/* Return current effect's enabled info*/
-	bool getFx(ofxPostGlitchType type_);
+	bool getFx(const string & shaderName);
 
 	/* Apply enable effects to target Fbo */
 	void generateFx();
-
-protected:
-	bool		bShading[GLITCH_NUM];
-	ofShader	shader[GLITCH_NUM];
-	ofFbo*		targetBuffer;
-	ofFbo		ShadingBuffer;
-	ofPoint		buffer_size;
-	float ShadeVal[4];
-    map<ofxPostGlitchType, float> timers;
     
-    void onUpdate(ofEventArgs &data);
+    void listShaders();
 };
 
 #endif /* defined(__ofxPostGlitchExample__ofxPostGlitch__) */

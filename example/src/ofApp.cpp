@@ -12,8 +12,8 @@ void testApp::setup(){
 	bShowHelp  = true;
 	myFbo.allocate(512, 512);
 
-	myGlitch.setup(&myFbo);
-
+	myGlitch.setup(&myFbo, "Shaders");
+    myGlitch.listShaders();
 }
 
 //--------------------------------------------------------------

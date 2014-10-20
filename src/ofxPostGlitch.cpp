@@ -7,36 +7,90 @@
 
 #include "ofxPostGlitch.h"
 
-void ofxPostGlitch::setup(ofFbo *buffer_){
+static const string VERTEX_SHADER_NAME  = "ofxPostGlitch.vert";
+static const string MODULE_NAME         = "ofxPostGlitch";
+
+bool ofxPostGlitch::setup(ofFbo *buffer_, const string & shaderDirectory)
+{
+    reset();
+    setFbo(buffer_);
+    return setShaders(shaderDirectory);
+}
+
+bool ofxPostGlitch::setup(ofFbo *buffer_)
+{
+    return setup(buffer_, OFXPOSTGLITCH_DEFAULT_SHADER_DIR);
+}
+
+void ofxPostGlitch::setFbo(ofFbo *buffer_)
+{
 	targetBuffer = buffer_;
 	buffer_size.set(buffer_->getWidth(), buffer_->getHeight());
 	ShadingBuffer.allocate(buffer_size.x,buffer_size.y);
 }
 
-void ofxPostGlitch::setFbo(ofFbo *buffer_){
-	targetBuffer = buffer_;
-	buffer_size.set(buffer_->getWidth(), buffer_->getHeight());
-	ShadingBuffer.allocate(buffer_size.x,buffer_size.y);
+bool ofxPostGlitch::setShaders(const string &shaderDirectory)
+{
+    int num = dir.listDir(shaderDirectory);
+    for (int i = 0; i < num; i++)
+    {
+        setShader(dir.getPath(i));
+    }
 }
 
-void ofxPostGlitch::setFx(ofxPostGlitchType type_, bool enabled){
-	bShading[type_] = enabled;
+bool ofxPostGlitch::setShader(const string &shaderPath)
+{
+    string fileName = ofSplitString(shaderPath, "/").back();
+    if (fileName == VERTEX_SHADER_NAME) return false;
+    vector<string> shaderName = ofSplitString(fileName, ".");
+    if (shaderName.size() != 2)
+    {
+        ofLogError(MODULE_NAME) << "inviled shader name: " << fileName;
+        return false;
+    }
+    if (shaderName[1] == "frag" || shaderName[1] == "fr")
+    {
+        shaders.push_back(SHADER());
+        shaders.back().flug = false;
+        shaders.back().shaderName = shaderName[0];
+        if (!shaders.back().shader.load(dir.path() + "/" + VERTEX_SHADER_NAME, shaderPath))
+        {
+            ofLogError(MODULE_NAME) << "faild load shader: " << shaderPath;
+            shaders.pop_back();
+            return false;
+        }
+        ofLogVerbose(MODULE_NAME) << "load shader: " << shaderPath;
+    }
+    return true;
 }
 
-void ofxPostGlitch::toggleFx(ofxPostGlitchType type_){
-	bShading[type_] ^= true;
+void ofxPostGlitch::setFx(const string & shaderName, bool enabled)
+{
+    SHADER * s = getShaderFromName(shaderName);
+    if (s != NULL) s->flug = enabled;
 }
 
-void ofxPostGlitch::setFxTo(ofxPostGlitchType type_, float t){
-    this->setFx(type_, true);
-    timers.insert(make_pair(type_, t));
+void ofxPostGlitch::toggleFx(const string & shaderName)
+{
+    SHADER * s = getShaderFromName(shaderName);
+    if (s != NULL) s->flug ^= true;
 }
 
-bool ofxPostGlitch::getFx(ofxPostGlitchType type_){
-	return bShading[type_];
+void ofxPostGlitch::setFxTo(const string & shaderName, float second)
+{
+    this->setFx(shaderName, true);
+    timers.insert(make_pair(shaderName, second));
 }
 
-void ofxPostGlitch::generateFx(){
+bool ofxPostGlitch::getFx(const string & shaderName)
+{
+    SHADER * s = getShaderFromName(shaderName);
+    if (s != NULL) return s->flug;
+    return false;
+}
+
+void ofxPostGlitch::generateFx()
+{
 	if (targetBuffer == NULL){
 		ofLog(OF_LOG_WARNING, "ofxFboFX --- Fbo is not allocated.");
 		return;
@@ -57,21 +111,23 @@ void ofxPostGlitch::generateFx(){
 	ofSetColor(255);
 	glClearColor(0, 0, 0, 0.0);
 
-	for (int i = 0;i < GLITCH_NUM;i++){
-		if (bShading[i]){
-			shader[i].begin();
-			shader[i].setUniformTexture	("image"		,*targetBuffer,0);
-			shader[i].setUniform1i		("trueWidth"	,buffer_size.x);
-			shader[i].setUniform1i		("trueHeight"	,buffer_size.y);
-			shader[i].setUniform1f		("rand"			,ofRandom(1));
-			shader[i].setUniform1f		("mouseX"		,ofGetMouseX());
-			shader[i].setUniform1f		("mouseY"		,ofGetMouseY());
-			shader[i].setUniform1f		("val1"			,ShadeVal[0]);
-			shader[i].setUniform1f		("val2"			,ShadeVal[1]);
-			shader[i].setUniform1f		("val3"			,ShadeVal[2]);
-			shader[i].setUniform1f		("val4"			,ShadeVal[3]);
-			shader[i].setUniform1f		("timer"		,ofGetElapsedTimef());
-			shader[i].setUniform2fv		("blur_vec"		,v);
+	for (int i = 0;i < shaders.size(); i++)
+    {
+		if (shaders[i].flug)
+        {
+			shaders[i].shader.begin();
+			shaders[i].shader.setUniformTexture	("image"		,*targetBuffer,0);
+			shaders[i].shader.setUniform1i		("trueWidth"	,buffer_size.x);
+			shaders[i].shader.setUniform1i		("trueHeight"	,buffer_size.y);
+			shaders[i].shader.setUniform1f		("rand"			,ofRandom(1));
+			shaders[i].shader.setUniform1f		("mouseX"		,ofGetMouseX());
+			shaders[i].shader.setUniform1f		("mouseY"		,ofGetMouseY());
+			shaders[i].shader.setUniform1f		("val1"			,ShadeVal[0]);
+			shaders[i].shader.setUniform1f		("val2"			,ShadeVal[1]);
+			shaders[i].shader.setUniform1f		("val3"			,ShadeVal[2]);
+			shaders[i].shader.setUniform1f		("val4"			,ShadeVal[3]);
+			shaders[i].shader.setUniform1f		("timer"		,ofGetElapsedTimef());
+			shaders[i].shader.setUniform2fv		("blur_vec"		,v);
 
 			ShadingBuffer.begin();
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -86,7 +142,7 @@ void ofxPostGlitch::generateFx(){
             glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
             
 			ShadingBuffer.end();
-			shader[i].end();
+			shaders[i].shader.end();
 
 			targetBuffer->begin();
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -97,13 +153,50 @@ void ofxPostGlitch::generateFx(){
     ofPopStyle();
 }
 
-void ofxPostGlitch::onUpdate(ofEventArgs &data){
-    if (!timers.empty()){
+void ofxPostGlitch::listShaders()
+{
+    cout << "+----+----+----+----+----+----+----+" << endl;
+    vector<SHADER>::iterator it = shaders.begin();
+    int i = 0;
+    while (it != shaders.end())
+    {
+        cout << "index: " << i << "  | shader name: " << it->shaderName << endl;
+        ++it;
+        ++i;
+    }
+    cout << "+----+----+----+----+----+----+----+" << endl;
+}
+
+ofxPostGlitch::SHADER * ofxPostGlitch::getShaderFromName(const string & name)
+{
+    vector<SHADER>::iterator it = shaders.begin();
+    while (it != shaders.end())
+    {
+        if (it->shaderName == name)
+        {
+            return &(*it);
+        } else ++it;
+    }
+    return NULL;
+}
+
+void ofxPostGlitch::reset()
+{
+    shaders.clear();
+    timers.clear();
+}
+
+void ofxPostGlitch::onUpdate(ofEventArgs &data)
+{
+    if (!timers.empty())
+    {
         float lastFrameTime = ofGetLastFrameTime();
-        map<ofxPostGlitchType, float>::iterator it = timers.begin();
-        while (it != timers.end()){
+        map<string, float>::iterator it = timers.begin();
+        while (it != timers.end())
+        {
             it->second -= lastFrameTime;
-            if (it->second < 0){
+            if (it->second < 0)
+            {
                 this->setFx(it->first, false);
                 timers.erase(it++);
             } else ++it;
