@@ -69,17 +69,20 @@ public:
     /* Set shaders from directory */
     bool setShaders(const string & shaderDirectory);
     
-    /* Set a shader */
-    bool setShader(const string & shaderPath);
+    /* Add a shader */
+    bool addShader(const string & shaderPath);
 
 	/* Switch each effects on/off */
 	void setFx(const string & shaderName,bool enabled);
+    void setFx(int shaderIndex, bool enabled);
 
 	/* Toggle each effects on/off */
 	void toggleFx(const string & shaderName);
+    void toggleFx(int shaderIndex);
     
     /* Enable each effects for <t>sec. */
     void setFxTo(const string & shaderName, float second);
+    void setFxTo(int shaderIndex, float second);
 
 	/* Return current effect's enabled info*/
 	bool getFx(const string & shaderName);

@@ -12,7 +12,6 @@ static const string MODULE_NAME         = "ofxPostGlitch";
 
 bool ofxPostGlitch::setup(ofFbo *buffer_, const string & shaderDirectory)
 {
-    reset();
     setFbo(buffer_);
     return setShaders(shaderDirectory);
 }
@@ -31,14 +30,15 @@ void ofxPostGlitch::setFbo(ofFbo *buffer_)
 
 bool ofxPostGlitch::setShaders(const string &shaderDirectory)
 {
+    reset();
     int num = dir.listDir(shaderDirectory);
     for (int i = 0; i < num; i++)
     {
-        setShader(dir.getPath(i));
+        addShader(dir.getPath(i));
     }
 }
 
-bool ofxPostGlitch::setShader(const string &shaderPath)
+bool ofxPostGlitch::addShader(const string &shaderPath)
 {
     string fileName = ofSplitString(shaderPath, "/").back();
     if (fileName == VERTEX_SHADER_NAME) return false;
@@ -70,16 +70,34 @@ void ofxPostGlitch::setFx(const string & shaderName, bool enabled)
     if (s != NULL) s->flug = enabled;
 }
 
+void ofxPostGlitch::setFx(int shaderIndex, bool enabled)
+{
+    if (shaderIndex < 0 || shaderIndex >= shaders.size()) return;
+    shaders[shaderIndex].flug = enabled;
+}
+
 void ofxPostGlitch::toggleFx(const string & shaderName)
 {
     SHADER * s = getShaderFromName(shaderName);
     if (s != NULL) s->flug ^= true;
 }
 
+void ofxPostGlitch::toggleFx(int shaderIndex)
+{
+    if (shaderIndex < 0 || shaderIndex >= shaders.size()) return;
+    shaders[shaderIndex].flug ^= true;
+}
+
 void ofxPostGlitch::setFxTo(const string & shaderName, float second)
 {
     this->setFx(shaderName, true);
     timers.insert(make_pair(shaderName, second));
+}
+
+void ofxPostGlitch::setFxTo(int shaderIndex, float second)
+{
+    this->setFx(shaderIndex, true);
+    timers.insert(make_pair(shaders[shaderIndex].shaderName, second));
 }
 
 bool ofxPostGlitch::getFx(const string & shaderName)

@@ -96,10 +96,14 @@ void testApp::keyPressed(int key){
 	if (key == 'y') myGlitch.setFx(OFXPOSTGLITCH_CR_REDINVERT	, true);
 	if (key == 'u') myGlitch.setFx(OFXPOSTGLITCH_CR_GREENINVERT	, true);
     
-    if (key == 'a') myGlitch.setFxTo(OFXPOSTGLITCH_CONVERGENCE  , 1);
+    if (key == 'a') myGlitch.setFx("original"                   , true);
+    
+    if (key == 's') myGlitch.setFxTo(OFXPOSTGLITCH_CONVERGENCE  , 1);
 
 	if (key == 'l') bDrawLenna ^= true;
 	if (key == 'h') bShowHelp ^= true;
+    
+    if (key == 'c') myGlitch.setShaders("Shaders");
 }
 
 //--------------------------------------------------------------
@@ -122,6 +126,8 @@ void testApp::keyReleased(int key){
 	if (key == 't') myGlitch.setFx(OFXPOSTGLITCH_CR_BLUEINVERT	, false);
 	if (key == 'y') myGlitch.setFx(OFXPOSTGLITCH_CR_REDINVERT	, false);
 	if (key == 'u') myGlitch.setFx(OFXPOSTGLITCH_CR_GREENINVERT	, false);
+    
+    if (key == 'a') myGlitch.setFx("original"                   , false);
 }
 
 //--------------------------------------------------------------
