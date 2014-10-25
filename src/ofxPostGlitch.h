@@ -10,6 +10,8 @@
 
 #include "ofMain.h"
 
+static const int    GLITCH_NUM  = 17;
+
 static const string OFXPOSTGLITCH_DEFAULT_SHADER_DIR    = "Shaders";
 static const string OFXPOSTGLITCH_CONVERGENCE           = "convergence";
 static const string OFXPOSTGLITCH_GLOW                  = "glow";
