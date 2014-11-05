@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "E4B69B5A0A3A1756003C02F2"
-               BuildableName = "ofxPostGlitchExample.app"
-               BlueprintName = "ofxPostGlitchExample"
-               ReferencedContainer = "container:ofxPostGlitchExample.xcodeproj">
+               BuildableName = "example_ver084.app"
+               BlueprintName = "example_ver084"
+               ReferencedContainer = "container:example_ver084.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "E4B69B5A0A3A1756003C02F2"
-            BuildableName = "ofxPostGlitchExample.app"
-            BlueprintName = "ofxPostGlitchExample"
-            ReferencedContainer = "container:ofxPostGlitchExample.xcodeproj">
+            BuildableName = "example_ver084.app"
+            BlueprintName = "example_ver084"
+            ReferencedContainer = "container:example_ver084.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -52,9 +52,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "E4B69B5A0A3A1756003C02F2"
-            BuildableName = "ofxPostGlitchExample.app"
-            BlueprintName = "ofxPostGlitchExample"
-            ReferencedContainer = "container:ofxPostGlitchExample.xcodeproj">
+            BuildableName = "example_ver084.app"
+            BlueprintName = "example_ver084"
+            ReferencedContainer = "container:example_ver084.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -70,9 +70,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "E4B69B5A0A3A1756003C02F2"
-            BuildableName = "ofxPostGlitchExample.app"
-            BlueprintName = "ofxPostGlitchExample"
-            ReferencedContainer = "container:ofxPostGlitchExample.xcodeproj">
+            BuildableName = "example_ver084.app"
+            BlueprintName = "example_ver084"
+            ReferencedContainer = "container:example_ver084.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:ofxPostGlitchExample.xcodeproj">
+      location = "self:example_ver084.xcodeproj">
    </FileRef>
 </Workspace>
