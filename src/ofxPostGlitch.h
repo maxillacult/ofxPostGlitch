@@ -39,6 +39,7 @@ protected:
         bool        flug;
         string      shaderName;
         ofShader    shader;
+        float       level; ///< Level is multipurpose value
     } SHADER;
     
     vector<SHADER>      shaders;
@@ -93,6 +94,13 @@ public:
 	void generateFx();
     
     void listShaders();
+    
+    /* Set level */
+    void setFxLevel(const string & shaderName, float level);
+    void setFxLevel(int shaderIndex, float level);
+    void setAllFxLevel(float level);
+    float getFxLevel(const string & shaderName);
+    float getFxLevel(int shaderIndex);
 };
 
 #endif /* defined(__ofxPostGlitchExample__ofxPostGlitch__) */

@@ -34,14 +34,18 @@ bool ofxPostGlitch::setShaders(const string &shaderDirectory)
     int num = dir.listDir(shaderDirectory);
     for (int i = 0; i < num; i++)
     {
-        addShader(dir.getPath(i));
+        if (!addShader(dir.getPath(i)))
+        {
+            return false;
+        }
     }
+    return true;
 }
 
 bool ofxPostGlitch::addShader(const string &shaderPath)
 {
     string fileName = ofSplitString(shaderPath, "/").back();
-    if (fileName == VERTEX_SHADER_NAME) return false;
+    if (fileName == VERTEX_SHADER_NAME) return true;
     vector<string> shaderName = ofSplitString(fileName, ".");
     if (shaderName.size() != 2)
     {
@@ -53,6 +57,7 @@ bool ofxPostGlitch::addShader(const string &shaderPath)
         shaders.push_back(SHADER());
         shaders.back().flug = false;
         shaders.back().shaderName = shaderName[0];
+        shaders.back().level = 1.0;
         if (!shaders.back().shader.load(dir.path() + "/" + VERTEX_SHADER_NAME, shaderPath))
         {
             ofLogError(MODULE_NAME) << "faild load shader: " << shaderPath;
@@ -100,6 +105,38 @@ void ofxPostGlitch::setFxTo(int shaderIndex, float second)
     timers.insert(make_pair(shaders[shaderIndex].shaderName, second));
 }
 
+void ofxPostGlitch::setFxLevel(const string &shaderName, float level)
+{
+    SHADER * s = getShaderFromName(shaderName);
+    if (s != NULL) s->level = level;
+}
+
+void ofxPostGlitch::setFxLevel(int shaderIndex, float level)
+{
+    if (shaderIndex < 0 || shaderIndex >= shaders.size()) return -1;
+    shaders[shaderIndex].level = level;
+}
+
+float ofxPostGlitch::getFxLevel(const string &shaderName)
+{
+    SHADER * s = getShaderFromName(shaderName);
+    return s->level;
+}
+
+float ofxPostGlitch::getFxLevel(int shaderIndex)
+{
+    if (shaderIndex < 0 || shaderIndex >= shaders.size()) return -1;
+    return shaders[shaderIndex].level;
+}
+
+void ofxPostGlitch::setAllFxLevel(float level)
+{
+    for (int i = 0;i < shaders.size(); i++)
+    {
+        shaders[i].level = level;
+    }
+}
+
 bool ofxPostGlitch::getFx(const string & shaderName)
 {
     SHADER * s = getShaderFromName(shaderName);
@@ -110,7 +147,7 @@ bool ofxPostGlitch::getFx(const string & shaderName)
 void ofxPostGlitch::generateFx()
 {
 	if (targetBuffer == NULL){
-		ofLog(OF_LOG_WARNING, "ofxFboFX --- Fbo is not allocated.");
+		ofLog(OF_LOG_WARNING, "ofxPostGlitch --- Fbo is not allocated.");
 		return;
 	}
 
@@ -146,6 +183,7 @@ void ofxPostGlitch::generateFx()
 			shaders[i].shader.setUniform1f		("val4"			,ShadeVal[3]);
 			shaders[i].shader.setUniform1f		("timer"		,ofGetElapsedTimef());
 			shaders[i].shader.setUniform2fv		("blur_vec"		,v);
+            shaders[i].shader.setUniform1f      ("level", shaders[i].level);
 
 			ShadingBuffer.begin();
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);

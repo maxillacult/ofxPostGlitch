@@ -43,6 +43,9 @@ void testApp::update(){
 		lenna.draw(0, 0);
 	}
 	myFbo.end();
+    
+    // FX level is a multiperpose value
+    myGlitch.setFxLevel("original", ofMap(ofGetMouseX(), 0, ofGetWidth(), 0.0, 0.1, true));
 }
 
 //--------------------------------------------------------------
@@ -65,8 +68,9 @@ void testApp::draw(){
 	info += "1 - 0 : Apply glitch effects.\n";
 	info += "q - u : Apply color remap effects.\n";
 	info += "L key : Switch 3Dview / 2DImage.\n";
-	info += "H key : Hide or show this information.";
-
+	info += "H key : Hide or show this information.\n";
+    info += "a key : Apply your original effect with FX-Level=" + ofToString(myGlitch.getFxLevel("original"));
+    
 	if (bShowHelp){
 		ofSetColor(0, 200);
 		ofRect(25, 17, 320, 60);
