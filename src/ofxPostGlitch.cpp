@@ -173,6 +173,7 @@ void ofxPostGlitch::generateFx()
 	if (ofGetFrameNum() % step == 0){
 		step = ofRandom(10,30);
 		ShadeVal[0] = ofRandom(100);
+        ShadeVal[1] = ofRandom(100);
 		ShadeVal[2] = ofRandom(100);
 		ShadeVal[3] = ofRandom(100);
 	}
@@ -227,7 +228,6 @@ void ofxPostGlitch::generateFx()
 
 void ofxPostGlitch::listShaders()
 {
-    cout << "+----+----+----+----+----+----+----+" << endl;
     vector<SHADER>::iterator it = shaders.begin();
     int i = 0;
     while (it != shaders.end())
@@ -236,7 +236,6 @@ void ofxPostGlitch::listShaders()
         ++it;
         ++i;
     }
-    cout << "+----+----+----+----+----+----+----+" << endl;
 }
 
 ofxPostGlitch::SHADER * ofxPostGlitch::getShaderFromName(const string & name)
