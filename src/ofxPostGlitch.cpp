@@ -28,6 +28,22 @@ void ofxPostGlitch::setFbo(ofFbo *buffer_)
 	ShadingBuffer.allocate(buffer_size.x,buffer_size.y);
 }
 
+bool ofxPostGlitch::reloadShaders(const string & shaderDirectory)
+{
+    int num = dir.size();
+    if (shaderDirectory != "")
+    {
+        num = dir.listDir(shaderDirectory);
+    }
+    for (int i = 0; i < num; i++)
+    {
+        if (!addShader(dir.getPath(i)))
+        {
+            return false;
+        }
+    }
+}
+
 bool ofxPostGlitch::setShaders(const string &shaderDirectory)
 {
     reset();
@@ -183,7 +199,7 @@ void ofxPostGlitch::generateFx()
 			shaders[i].shader.setUniform1f		("val4"			,ShadeVal[3]);
 			shaders[i].shader.setUniform1f		("timer"		,ofGetElapsedTimef());
 			shaders[i].shader.setUniform2fv		("blur_vec"		,v);
-            shaders[i].shader.setUniform1f      ("level", shaders[i].level);
+            shaders[i].shader.setUniform1f      ("level"        ,shaders[i].level);
 
 			ShadingBuffer.begin();
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);

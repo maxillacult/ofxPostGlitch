@@ -101,6 +101,9 @@ public:
     void setAllFxLevel(float level);
     float getFxLevel(const string & shaderName);
     float getFxLevel(int shaderIndex);
+    
+    /* Reload shaders */
+    bool reloadShaders(const string & shaderDirectory = "");
 };
 
 #endif /* defined(__ofxPostGlitchExample__ofxPostGlitch__) */
