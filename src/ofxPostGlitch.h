@@ -10,6 +10,24 @@
 
 #include "ofMain.h"
 
+#include "Convergence.h"
+#include "CutSlider.h"
+#include "Glow.h"
+#include "Invert.h"
+#include "Noise.h"
+#include "Outline.h"
+#include "Shaker.h"
+#include "Slitscan.h"
+#include "Swell.h"
+#include "Twist.h"
+#include "CrBlueinvert.h"
+#include "CrBlueraise.h"
+#include "CrGreeninvert.h"
+#include "CrGreenraise.h"
+#include "CrHighContrast.h"
+#include "CrRedinvert.h"
+#include "CrRedraise.h"
+
 #define GLITCH_NUM 17
 
 enum ofxPostGlitchType{
@@ -37,23 +55,42 @@ public:
 
 	ofxPostGlitch(){
 		targetBuffer = NULL;
-		shader[0].load("Shaders/convergence");
-		shader[1].load("Shaders/glow");
-		shader[2].load("Shaders/shaker");
-		shader[3].load("Shaders/cut_slider");
-		shader[4].load("Shaders/twist");
-		shader[5].load("Shaders/outline");
-		shader[6].load("Shaders/noise");
-		shader[7].load("Shaders/slitscan");
-		shader[8].load("Shaders/swell");
-		shader[9].load("Shaders/invert");
-		shader[10].load("Shaders/crHighContrast");
-		shader[11].load("Shaders/crBlueraise");
-		shader[12].load("Shaders/crRedraise");
-		shader[13].load("Shaders/crGreenraise");
-		shader[14].load("Shaders/crRedinvert");
-		shader[15].load("Shaders/crBlueinvert");
-		shader[16].load("Shaders/crGreeninvert");
+        
+        Convergence convergence;
+        Glow glow;
+        Shaker shaker;
+        CutSlider cutSlider;
+        Twist twist;
+        Outline outline;
+        Noise noise;
+        Slitscan slitscan;
+        Swell swell;
+        Invert invert;
+        CrHighContrast crHighContrast;
+        CrBlueraise crBlueraise;
+        CrRedraise crRedraise;
+        CrGreenraise crGreenraise;
+        CrRedinvert crRedinvert;        
+        CrBlueinvert crBlueinvert;
+        CrGreeninvert crGreeninvert;
+        
+		shader[0] = convergence;
+        shader[1] = glow;
+		shader[2] = shaker;
+		shader[3] = cutSlider;
+        shader[4] = twist;
+		shader[5] = outline;
+		shader[6] = noise;
+		shader[7] = slitscan;
+		shader[8] = swell;
+		shader[9] = invert;
+        shader[10] = crHighContrast;
+		shader[11] = crBlueraise;
+		shader[12] = crRedraise;
+		shader[13] = crGreenraise;
+		shader[14] = crRedinvert;
+		shader[15] = crBlueinvert;
+		shader[16] = crGreeninvert;
 	}
 
 	/* Initialize & set target Fbo */

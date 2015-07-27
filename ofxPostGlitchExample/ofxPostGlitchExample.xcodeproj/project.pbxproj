@@ -85,6 +85,24 @@
 		E7F985F515E0DE99003869B5 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = /System/Library/Frameworks/Accelerate.framework; sourceTree = "<absolute>"; };
 		E9C50E381B64AA34008C1183 /* ofxPostGlitch.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxPostGlitch.cpp; sourceTree = "<group>"; };
 		E9C50E391B64AA34008C1183 /* ofxPostGlitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxPostGlitch.h; sourceTree = "<group>"; };
+		E9C50E5A1B65B8E4008C1183 /* Convergence.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Convergence.h; sourceTree = "<group>"; };
+		E9C50E5B1B65B8E4008C1183 /* CrBlueinvert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CrBlueinvert.h; sourceTree = "<group>"; };
+		E9C50E5C1B65B8E4008C1183 /* CrBlueraise.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CrBlueraise.h; sourceTree = "<group>"; };
+		E9C50E5D1B65B8E4008C1183 /* CrGreeninvert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CrGreeninvert.h; sourceTree = "<group>"; };
+		E9C50E5E1B65B8E4008C1183 /* CrGreenraise.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CrGreenraise.h; sourceTree = "<group>"; };
+		E9C50E5F1B65B8E4008C1183 /* CrHighContrast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CrHighContrast.h; sourceTree = "<group>"; };
+		E9C50E601B65B8E4008C1183 /* CrRedinvert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CrRedinvert.h; sourceTree = "<group>"; };
+		E9C50E611B65B8E4008C1183 /* CrRedraise.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CrRedraise.h; sourceTree = "<group>"; };
+		E9C50E621B65B8E4008C1183 /* CutSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CutSlider.h; sourceTree = "<group>"; };
+		E9C50E631B65B8E4008C1183 /* Glow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Glow.h; sourceTree = "<group>"; };
+		E9C50E641B65B8E4008C1183 /* Invert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Invert.h; sourceTree = "<group>"; };
+		E9C50E651B65B8E4008C1183 /* Noise.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Noise.h; sourceTree = "<group>"; };
+		E9C50E661B65B8E4008C1183 /* Outline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Outline.h; sourceTree = "<group>"; };
+		E9C50E671B65B8E4008C1183 /* PGShaderConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PGShaderConstants.h; sourceTree = "<group>"; };
+		E9C50E681B65B8E4008C1183 /* Shaker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Shaker.h; sourceTree = "<group>"; };
+		E9C50E691B65B8E4008C1183 /* Slitscan.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Slitscan.h; sourceTree = "<group>"; };
+		E9C50E6A1B65B8E4008C1183 /* Swell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Swell.h; sourceTree = "<group>"; };
+		E9C50E6B1B65B8E4008C1183 /* Twist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Twist.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -214,14 +232,32 @@
 			children = (
 				E9C50E381B64AA34008C1183 /* ofxPostGlitch.cpp */,
 				E9C50E391B64AA34008C1183 /* ofxPostGlitch.h */,
-				E9C50E3E1B64AC89008C1183 /* shaders */,
+				E9C50E591B65B8E4008C1183 /* shaders */,
 			);
 			path = src;
 			sourceTree = "<group>";
 		};
-		E9C50E3E1B64AC89008C1183 /* shaders */ = {
+		E9C50E591B65B8E4008C1183 /* shaders */ = {
 			isa = PBXGroup;
 			children = (
+				E9C50E5A1B65B8E4008C1183 /* Convergence.h */,
+				E9C50E5B1B65B8E4008C1183 /* CrBlueinvert.h */,
+				E9C50E5C1B65B8E4008C1183 /* CrBlueraise.h */,
+				E9C50E5D1B65B8E4008C1183 /* CrGreeninvert.h */,
+				E9C50E5E1B65B8E4008C1183 /* CrGreenraise.h */,
+				E9C50E5F1B65B8E4008C1183 /* CrHighContrast.h */,
+				E9C50E601B65B8E4008C1183 /* CrRedinvert.h */,
+				E9C50E611B65B8E4008C1183 /* CrRedraise.h */,
+				E9C50E621B65B8E4008C1183 /* CutSlider.h */,
+				E9C50E631B65B8E4008C1183 /* Glow.h */,
+				E9C50E641B65B8E4008C1183 /* Invert.h */,
+				E9C50E651B65B8E4008C1183 /* Noise.h */,
+				E9C50E661B65B8E4008C1183 /* Outline.h */,
+				E9C50E671B65B8E4008C1183 /* PGShaderConstants.h */,
+				E9C50E681B65B8E4008C1183 /* Shaker.h */,
+				E9C50E691B65B8E4008C1183 /* Slitscan.h */,
+				E9C50E6A1B65B8E4008C1183 /* Swell.h */,
+				E9C50E6B1B65B8E4008C1183 /* Twist.h */,
 			);
 			path = shaders;
 			sourceTree = "<group>";
