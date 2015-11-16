@@ -30,6 +30,7 @@ void ofxPostGlitch::setFbo(ofFbo *buffer_)
 
 bool ofxPostGlitch::reloadShaders(const string & shaderDirectory)
 {
+    shaders.clear();
     int num = dir.size();
     if (shaderDirectory != "")
     {
@@ -143,6 +144,21 @@ float ofxPostGlitch::getFxLevel(int shaderIndex)
 {
     if (shaderIndex < 0 || shaderIndex >= shaders.size()) return -1;
     return shaders[shaderIndex].level;
+}
+
+const vector<ofxPostGlitch::SHADER>& ofxPostGlitch::getShaders()
+{
+    return shaders;
+}
+
+vector<string> ofxPostGlitch::getFxNames()
+{
+    vector<string> names;
+    for (int i = 0; i < shaders.size(); i++)
+    {
+        names.push_back(shaders[i].shaderName);
+    }
+    return names;
 }
 
 void ofxPostGlitch::setAllFxLevel(float level)

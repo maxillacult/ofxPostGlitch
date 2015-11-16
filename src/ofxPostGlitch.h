@@ -104,6 +104,9 @@ public:
     
     /* Reload shaders */
     bool reloadShaders(const string & shaderDirectory = "");
+    
+    const vector<SHADER>& getShaders();
+    vector<string> getFxNames();
 };
 
 #endif /* defined(__ofxPostGlitchExample__ofxPostGlitch__) */
