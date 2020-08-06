@@ -21,7 +21,7 @@ public:
         string vertexShader;
         string fragmentShader;
         
-        if (ofGetGLProgrammableRenderer())
+        if (ofIsGLProgrammableRenderer())
         {
             vertexShader = gl150VertShader;
             
