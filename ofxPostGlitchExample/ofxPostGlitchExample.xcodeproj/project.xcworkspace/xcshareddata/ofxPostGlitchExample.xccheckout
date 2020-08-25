@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>853D6EDA-3CB1-4A57-A8C8-D4E7A06D2584</string>
+	<key>IDESourceControlProjectName</key>
+	<string>ofxPostGlitchExample</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>210A84CB64DBE001319448A793DFC671846EB46E</key>
+		<string>github.com:maxillacult/ofxPostGlitch.git</string>
+		<key>7CE2AA486B8472FBF4A904BD991A70BB883C9FE9</key>
+		<string>github.com:Akira-Hayasaka/2015SuperDelux.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>ofxPostGlitchExample/ofxPostGlitchExample.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>210A84CB64DBE001319448A793DFC671846EB46E</key>
+		<string>../../../../addons/ofxPostGlitch</string>
+		<key>7CE2AA486B8472FBF4A904BD991A70BB883C9FE9</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>github.com:Akira-Hayasaka/2015SuperDelux.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>7CE2AA486B8472FBF4A904BD991A70BB883C9FE9</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>7CE2AA486B8472FBF4A904BD991A70BB883C9FE9</string>
+			<key>IDESourceControlWCCName</key>
+			<string>20150826SuperDelux</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>210A84CB64DBE001319448A793DFC671846EB46E</string>
+			<key>IDESourceControlWCCName</key>
+			<string>ofxPostGlitch</string>
+		</dict>
+	</array>
+</dict>
+</plist>
